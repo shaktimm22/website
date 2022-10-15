@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicons -->
+    <link rel="shortcut icon" href="icon/trippad_logo.png" type="image/x-icon">
+    <link rel="icon" href="icon/trippad_logo.png" type="image/x-icon">
+    
+    <title>Admin Login</title>
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" href="css/style00.css">
+</head>
+
+<!-- Login Script -->
+<script type='module'>
+
+    // restore null in 'temp'
+    var temp = "null";
+    sessionStorage.setItem("TEMP", temp);
+    
+
+
+    // Import The Functions
+    import {
+        initializeApp
+    } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js';
+    import {
+        getAnalytics
+    } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js';
+    import {
+        getDatabase,
+        ref,
+        onValue,
+    } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js';
+
+    
+    // Confit Database Connection
+    const firebaseConfig = {
+        apiKey: "AIzaSyCvD33IM4CmwD33e0RwJoVAJt0JeSiBaEc",
+        authDomain: "busbookingapp-ecb53.firebaseapp.com",
+        databaseURL: "https://busbookingapp-ecb53-default-rtdb.firebaseio.com",
+        projectId: "busbookingapp-ecb53",
+        storageBucket: "busbookingapp-ecb53.appspot.com",
+        messagingSenderId: "559452439504",
+        appId: "1:559452439504:web:379828be835ad2d2a6afd5",
+        measurementId: "G-2RK15KDHP8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    
+
+    // Submit Button
+    submitData.addEventListener('click', (e) => {
+
+        // Store Length(number of user) in For Loop
+        const starCountRef = ref(database, 'admin/');
+        onValue(starCountRef, (snapshot) => {
+            const data = snapshot.val();
+            
+            var len = Object.keys(data).length;
+            
+            
+            // Store Username & Password
+            var name = document.getElementById('username').value;
+            var pass = document.getElementById('password').value;
+
+            // Admin ID Number a = 1
+            var a;
+            var count = 0;
+        
+            for( a=1 ; a<=len ; a++){
+                
+                
+                const starCountRef = ref(database, 'admin/user' + a );
+
+                    // Check Username and Password
+                    onValue(starCountRef, (snapshot) => {
+                        const data = snapshot.val();
+                        
+                        if(data.uname == name & data.upass == pass){
+                            alert('\nWelcome '+name);
+                            
+                            
+                            // Start SESSION Function to Store 'temp' = "Valid"
+                            var temp = "Valid";
+                            sessionStorage.setItem("TEMP", temp);
+                            
+                            // Relocate to Table Records page
+                            window.location.href = "view_records.html";
+                
+                        }
+                        else{
+                            count++;
+                            if(count==len){
+                                alert('\nYour Username and Password do not match \nPlease try again.');
+                            }
+                        }
+                    });
+
+            }; 
+        });
+        
+    });
+</script>
+
+<body>
+    
+    <div class="container">
+        <div class="myform"> 
+                <h1>Login</h1>
+                <hr>
+                <br><br>
+                
+                <div class="text">
+                    <img src="images/user.png" alt="user.png">
+                    <input type="text" id="username" name="username" placeholder="Username">
+                    <br><img src="images/lock.png" alt="lock.png">
+                    <input type="password" id="password" name="password" placeholder="Password">
+                </div>
+                
+                <input type="checkbox" onclick="myFunction()"> Show Password 
+                <br><br>
+                
+                
+                <button id="submitData">LOGIN</button>
+                
+        </div>
+        <div class="image">
+            <img src="images/admin.png" alt="Logo" width="300px">
+        </div>
+    </div>
+    <footer>
+        &#169; 2022 Trippad
+    </footer>
+</body>
+<script>
+    function myFunction() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+    </script>
+</html>

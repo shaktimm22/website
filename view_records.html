@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- favicons -->
+    <link rel="shortcut icon" href="icon/trippad_logo.png" type="image/x-icon">
+    <link rel="icon" href="icon/trippad_logo.png" type="image/x-icon">
+    <title>Records</title>
+    
+    <!--CSS Style -->
+    <link rel="stylesheet" href="css/style01.css">
+    
+    <!-- Tab View -->
+    <script src="scripts/tab_view.js"></script>
+</head>
+
+<!-- Input All Data Into Firebase (Main Code) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<!-- Exit Button -->
+<script type="text/javascript">
+        document.getElementById("btn").addEventListener("click",fun );  
+        function fun(){
+            let temp = "null";
+            sessionStorage.setItem("TEMP", temp);
+            window.location.href = "index.html";
+        }       
+</script>
+
+<body>
+    <!-- Level 1 Security | Check temp1 is valid or null -->
+    <script type="text/javascript">
+        let temp2 = sessionStorage.getItem("TEMP");
+        if( temp2 === "null"){
+        alert("\nLogin First");
+        window.location.href = "index.html";
+    } 
+    </script>
+    <a href="index.html" id="btn"><img  src="images/logout_icon.png" alt="Logout Button Icon" class="logoutButton"></a>
+    <a href="delete_record.html" id="btn2"> <img src="images/delete.png" alt="Delete Button Icon" class="deleteButton"> </a>
+    
+    <h2 class="text">Record Management</h2>
+    
+    <!-- Tab View Layout -->
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Bookings')" id="defaultOpen">Bookings</button>
+        <button class="tablinks" onclick="openTab(event, 'Buses')">Buses</button>
+        <button class="tablinks" onclick="openTab(event, 'Pending')">Buses : Approvals</button>
+        <button class="tablinks" onclick="openTab(event, 'Users')">Users</button>
+        <button class="tablinks" onclick="openTab(event, 'Bus_Owners')">Bus Owners</button>
+        <button class="tablinks" onclick="openTab(event, 'Owners_approval')">Bus Owners : Approvals</button>
+    </div>
+    
+    <!-- Get the element with id="defaultOpen" and click on it -->
+    <script type="module">
+        document.getElementById("defaultOpen").click();
+    </script>
+
+<!-- Bookings tab -->
+    <div id="Bookings" class="tabcontent">
+        <script src="scripts/bookings.js" type="module"></script>
+        <h3><div class="bookings">&darr;</div></h3>
+        <table id='dataTbl'>
+            <thead>
+            <tr>
+                <th style="background-color: rgb(55, 56, 56);">#</th>
+                <th colspan="6" style="text-align: center;">Passenger info</th>
+                <th colspan="2" style="text-align: center; background-color: rgb(55, 56, 56);">Booking info</th>
+                <th colspan="6" style="text-align: center;">Buses info</th>
+                <th colspan="2" style="text-align: center; background-color: rgb(55, 56, 56);">Date of</th>
+            </tr>
+            <tr>
+              <th>sl no.</th>
+              <th>User Id</th>
+              <th>Name</th>
+              <th>Phone No.</th>
+              <th>Email</th>
+              <th>Age</th>
+              <th>Gender</th>
+
+              <th>Status</th>
+              <th>Booking Id</th>
+              
+              <th>Bus Name</th>
+              <th>Bus Id</th>
+              <th>Route</th>
+              <th>Total Passengers</th>
+
+              <th>Seat No.</th>
+              <th>Sleeper Seats No.</th>
+              
+              <th>Booking</th>
+              <th>Journey</th>
+              
+    
+            </tr>
+        </thead>
+        </table>
+    </div>
+      
+<!-- Buses Tab -->
+    <div id="Buses" class="tabcontent">
+         <script src="scripts/approval_buses.js" type="module"></script>
+         <h3><div class="approval">&darr;</div></h3>
+         
+        <table id='dataTb5'>
+            <thead>
+              <tr>
+              <th>Sl No.</th>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Bus/Vehicle No.</th>
+              <th>Contact No.</th>
+              <th>Owner Id</th>
+              <th>Per Seat Price</th>
+              <th>Per Sleeper Seat Price</th>
+              <th>Route</th>
+              <th>D/A Timing</th>
+              <th>Type</th>
+              <th>Seat Listed</th>
+              <th>Sleeper Seat Listed</th>
+              <th>Timestamp</th>
+              <th>Approval</th>
+            </tr>
+        </thead>
+        </table>
+        
+    </div>
+
+    <!-- Buses Pending Tab -->
+    <div id="Pending" class="tabcontent">
+        <script src="scripts/pending_buses.js" type="module"></script>
+        <h3><div class="pending">&darr;</div></h3>
+       <table id='dataTb2'>
+           <thead>
+             <tr>
+                <th>Sl No.</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Bus/Vehicle No.</th>
+                <th>Contact No.</th>
+                <th>Owner Id</th>
+                <th>Per Seat Price</th>
+                <th>Per Sleeper Seat Price</th>
+                <th>Route</th>
+                <th>D/A Timing</th>
+                <th>Type</th>
+                <th>Seat Listed</th>
+                <th>Sleeper Seat Listed</th>
+                <th>Timestamp</th>
+                <th>Approval</th>
+           </tr>
+       </thead>
+       </table>
+       
+   </div>
+      
+
+   <!-- Users Tab -->
+    <div id="Users" class="tabcontent">
+        <script src="scripts/users.js" type="module"></script>
+        <h3><div class="users">&darr;</div></h3>
+        <table id='dataTb3'>
+            <thead>
+              <tr>
+              <th>Sl No.</th>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Mobile No.</th>
+              <th>Gender</th>
+              <th>Age</th>
+              <th>Date Of Birth</th>
+              <th>Time Stamp</th>
+            </tr>
+        </thead>
+        </table>
+    </div>
+
+
+    <!-- Bus owners tab -->
+    <div id="Bus_Owners" class="tabcontent">
+        <script src="scripts/bus_owners.js" type="module"></script>
+        <h3><div class="bus_owners">&darr;</div></h3>
+        <table id='dataTb4'>
+            <thead>
+              <tr>
+              <th>Sl No.</th>
+              <th>UID</th>
+              <th>Owner Id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Bus Id</th>
+              <th>Status</th>
+              <th>View More</th>
+        </thead>
+        </table>
+    </div>
+
+    <!-- Owners approval tab -->
+    <div id="Owners_approval" class="tabcontent">
+        <script src="scripts/bus_owner_approval.js" type="module"></script>
+        <h3><div class="owners_approval">&darr;</div></h3>
+        <table id='dataTb6'>
+            <thead>
+              <tr>
+                <th>Sl No.</th>
+                <th>UID</th>
+                <th>Owner Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Bus Id</th>
+                <th>Status</th>
+                <th>View More</th>
+        </thead>
+        </table>
+    </div>
+    
+</body>
+</html>

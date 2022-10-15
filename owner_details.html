@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Details</title>
+
+    <!-- favicons -->
+    <link rel="shortcut icon" href="icon/trippad_logo.png" type="image/x-icon">
+    <link rel="icon" href="icon/trippad_logo.png" type="image/x-icon">
+    
+    
+    <!-- Tab View -->
+    <script src="scripts/tab_view.js"></script>
+
+</head>
+
+<!-- Input All Data Into Firebase (Main Code) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<style>
+body{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'trebuchet MS';    
+}
+.back{
+    float: left;
+    padding-top: 30px;
+    padding-left: 10px;
+    height: 40px;
+    width: auto;
+}
+h2.header{
+  margin-top: 0px;
+  padding: 20px;
+  text-align: center;
+  font-size: 50px;
+  
+  color: whitesmoke;
+  background-color: black;
+  margin-bottom: 0px;
+  
+}
+    /* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 7px 25px;
+  transition: 0.3s;
+  font-size: 17px;
+  
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: rgb(168, 165, 165);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: rgb(0, 0, 0);
+  color: whitesmoke ;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+div.tabcontent div.personal{
+  margin-left: 65px;
+  font-size: 30px;
+}
+div.tabcontent div.bank{
+  margin-left: 225px;
+  font-size: 30px;
+}
+div.tabcontent div.gstin{
+  margin-left: 370px;
+  font-size: 30px;
+}
+div.tabcontent div.document{
+  margin-left: 560px;
+  font-size: 30px;
+}
+
+div.tabcontent input{
+  width: 300px;
+  margin-bottom: 30px;
+  margin-left: 30px;
+  border: 1px solid black;
+  padding-top: 3px;
+}
+div.tabcontent button{
+  background-color: black;
+  color: whitesmoke;
+  padding: 3px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.info{
+  background-color: rgb(205, 205, 205);
+  color: black;
+  margin-left: 10%;
+  margin-right: 10%;
+  border: .5px solid rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 5px 20px;
+}
+.info b{
+  font-size: 16px;
+}
+.info .right-side{
+  margin-left: 30%;
+}
+.info .address{
+  height: 70px;
+}
+span{
+  color: black;
+}
+
+
+</style>
+
+<script>
+    // catch owner id
+    var queryString = decodeURIComponent(window.location.search);
+    queryString = queryString.substring(4);
+     
+</script>
+<body>
+    <a href="view_records.html"><img class="back" src="images/back.png" alt="backButton" width="50px" height="auto"></a>
+    <h2 class="header">Owner Details</h2>
+    
+    <!-- Tab View Layout -->
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Personal')" id="defaultOpen">Personal Details</button>
+        <button class="tablinks" onclick="openTab(event, 'Bank')" >Bank Details</button>
+        <button class="tablinks" onclick="openTab(event, 'Gstin')">Gstin Details</button>
+        <button class="tablinks" onclick="openTab(event, 'Document')">Owner Document Details</button>
+    </div>
+    <!-- Get the element with id="defaultOpen" and click on it -->
+    <script type="module">
+        document.getElementById("defaultOpen").click();
+    </script>
+
+
+    <div id="Personal" class="tabcontent">
+        <h3><div class="personal">&darr;</div></h3>
+        <script src="scripts/owner_personal_details.js" type="module"></script>
+        
+        <div class="info">
+            <p><b>Id : </b><span id="id"></span><br></p>
+            <p><b>Name : </b><span id="name"></span><br></p>
+            <p><b>Mobile No. : </b><span id="phone"></span> <b class="right-side">Email Id : </b><span id="email"></span></p>
+            <p><b>Alternate Contact : </b></b><span id="alt_phone"></span> <b class="right-side">Alternate Email Id : </b><span id="alt_email"></span></p>
+            <p class="address"><b>Address :</b> <span id="address"></span> </p>
+            <p><b>Country : </b><span id="country"></span><b class="right-side">State : </b><span id="state"></span>
+            <p><b>District : </b><span id="district"></span><b class="right-side">City : </b><span id="city"></span></p>
+            <p><b>Pin code : </b><span id="pin_code"></span></p>
+            <hr>
+            <p><b>Travel's Name : </b><span id="travel_name"></span></p>
+            <p><b>Business Background: </b><span id="business"></span></p>
+            <p><b>Pan Number : </b><span id="pan_number"></span></p>
+        
+          </div>
+       
+    </div>
+
+    <div id="Bank" class="tabcontent">
+        <h3><div class="bank">&darr;</div></h3>
+        <script src="scripts/owner_bank_details.js" type="module"></script>
+        
+        <div class="info">
+          <p><b>Account Number : </b><span id="account_no"></span><br></p>
+          <p><b>IFSC Code : </b><span id="ifsc_code"></span><br></p>
+          <p><b>Bank Name : </b><span id="bank_name"></span><br></p>
+          <p><b>Bank Type : </b><span id="bank_type"></span><br></p>
+          <p><b>Beneficiary Name : </b><span id="beneficiary_name"></span><br></p>
+        </div>
+        
+       
+    </div>
+
+    <div id="Gstin" class="tabcontent">
+        <h3><div class="gstin">&darr;</div></h3>
+        <script src="scripts/owner_gstin_details.js" type="module"></script>
+        
+        <div class="info">
+          <p><b>GST : </b><span id="gstin"></span><br></p>
+          <p><b>Have A/C Bus : </b><span id="have_ac_bus"></span><br></p>
+          
+        </div>
+       
+    </div>
+
+    <div id="Document" class="tabcontent">
+        <h3><div class="document">&darr;</div></h3>
+        <script src="scripts/owner_docs.js" type="module"></script>
+        <div class="info">
+          <p><b>Id Proof : </b><span id="id_proof"></span><br></p>
+          <p><b>Pan Card : </b><span id="pan_card"></span><br></p>
+          <p><b>Gstin Certificate : </b><span id="gstin_cert"></span><br></p>
+          <p><b>Partnership : </b><span id="partnership"></span><br></p>
+          <p><b>Cancelled Cheque : </b><span id="cancelled_cheque"></span><br></p>
+          <p><b>Pvt.ltd. Document : </b><span id="pvt_lit_doc"></span><br></p>
+        </div>
+        
+       
+    </div>
+
+</body>
+<script>
+   
+   
+</script>
+</html>

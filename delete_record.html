@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicons -->
+    <link rel="shortcut icon" href="icon/trippad_logo.png" type="image/x-icon">
+    <link rel="icon" href="icon/trippad_logo.png" type="image/x-icon">
+    <title>Delete</title>
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" href="css/style02.css">
+
+    <!-- Tab View -->
+    <script src="scripts/tab_view.js"></script>
+
+</head>
+
+<!-- Input All Data Into Firebase (Main Code) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script type="module">
+
+        // Store 'null' Into temp Variable
+        let temp = "Valid";
+        sessionStorage.setItem("TEMP", temp);
+
+        // Import The Functions 
+        import {
+        initializeApp
+    } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js';
+    import {
+        getAnalytics
+    } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js';
+    import {
+        getDatabase,
+        ref,
+        set,
+        onValue,  
+        remove
+    } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js';
+
+    // Config Database Connection
+    const firebaseConfig = {
+            apiKey: "AIzaSyCvD33IM4CmwD33e0RwJoVAJt0JeSiBaEc",
+            authDomain: "busbookingapp-ecb53.firebaseapp.com",
+            databaseURL: "https://busbookingapp-ecb53-default-rtdb.firebaseio.com",
+            projectId: "busbookingapp-ecb53",
+            storageBucket: "busbookingapp-ecb53.appspot.com",
+            messagingSenderId: "559452439504",
+            appId: "1:559452439504:web:379828be835ad2d2a6afd5",
+            measurementId: "G-2RK15KDHP8"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    var len=0;
+
+           const starCountRef = ref(database, 'arch_data/');
+            onValue(starCountRef, (snapshot) => {
+            const data = snapshot.val();
+            
+            var size = Object.keys(data).length;
+            len = size + 1;
+            
+        });
+        // Delete Button For Buses
+        removeData2.addEventListener('click',(e) => {
+            var record_id2 = document.getElementById('user_id2').value;
+            var record_type2 = "buses";
+            var status2 = "pending";
+            var uid2 = "a"+len;
+            var time_stamp2 = String(new Date()).slice(0,-31);
+
+            if(uid2 && record_id2 && record_type2 && status2){
+                set(ref(database, 'arch_data/'+uid2), {
+                        uid : uid2,
+                        record_id : record_id2,
+                        record_type : record_type2,
+                        time_stamp : time_stamp2,
+                        status : status2
+                });
+                    
+            }
+            alert('Send request successfully');
+            window.location.href="delete_record.html";
+
+            });
+            
+            // Delete Button For Users
+            removeData3.addEventListener('click',(e) => {
+            var record_id3 = document.getElementById('user_id3').value;
+            var record_type3 = "users";
+            var status3 = "pending";
+            var uid3 = "a"+len;
+            var time_stamp3 = String(new Date()).slice(0,-31);
+            
+            
+            if(uid3 && record_id3 && record_type3 && status3){
+                set(ref(database, 'arch_data/'+uid3), {
+                        uid : uid3,
+                        record_id : record_id3,
+                        record_type : record_type3,
+                        time_stamp : time_stamp3,
+                        status : status3
+                });
+                    
+            }
+            alert('Send request successfully');
+            window.location.href="delete_record.html";
+            });
+            // Delete Button For Users
+            removeData5.addEventListener('click',(e) => {
+            var record_id4 = document.getElementById('user_id4').value;
+            var record_type4 = "bus_owners";
+            var status4 = "pending";
+            var uid4 = "a"+len;
+            var time_stamp4 = String(new Date()).slice(0,-31);
+
+            if(uid4 && record_id4 && record_type4 && status4 && time_stamp4){
+                set(ref(database, 'arch_data/'+uid4), {
+                        uid : uid4,
+                        record_id : record_id4,
+                        record_type : record_type4,
+                        time_stamp : time_stamp4,
+                        status : status4
+                        
+                });
+                    
+            }
+            alert('Send request successfully');
+            window.location.href="delete_record.html";
+            });
+
+        
+        
+</script>
+
+
+<body>
+    <!-- Level 1 Security | Check temp1 is valid or null -->
+    <script type="text/javascript">
+        let temp2 = sessionStorage.getItem("TEMP");
+        if( temp2 === "null"){
+        alert("\nLogin First");
+        window.location.href = "index.html";
+    } 
+    </script>
+    
+    <a href="view_records.html"><img class="back" src="images/back.png" alt="backButton" width="50px" height="auto"></a>
+    <h2>
+        <div class="header">Delete Records</div>
+    </h2> 
+    
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Buses')">Buses</button>
+        <button class="tablinks" onclick="openTab(event, 'Users')">Users</button>
+        <button class="tablinks" onclick="openTab(event, 'Bus_Owners')">Bus Owners</button>
+        <button class="tablinks" onclick="openTab(event, 'Status')"id="defaultOpen">Status</button>
+    </div>
+    
+
+    <script type="module">
+        // Get the element with id="defaultOpen" and click on it
+          document.getElementById("defaultOpen").click();
+    </script>
+
+
+    <div id="Buses" class="tabcontent">
+        <script src="scripts/del_buses.js" type="module"></script>
+        <h3><div class="buses">&darr;</div></h3>
+        
+        <div class="form">
+            Enter Bus Id : <br><input type="text" id="user_id2">
+            <button id="removeData2" class="btn">Delete</button>
+        </div>
+        
+        
+        <table id='dataTb2' class="center">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Number</th>
+                  <th>Timing</th>
+                  <th>Type</th>
+                  <th>Mobile No.</th>
+                  <th>Route</th>
+                  <th>Time Stamp</th>
+                </tr>
+                </thead>
+        </table>
+
+        
+        
+    </div>
+
+
+    <div id="Users" class="tabcontent">
+        <script src="scripts/del_users.js" type="module"></script>
+        <h3><div class="users">&darr;</div></h3>
+        
+        <div class="form">
+            Enter User Id : <br><input type="text" id="user_id3">
+            <button id="removeData3" class="btn">Delete</button>
+        </div>
+        
+        
+        <table id='dataTb3' class="center">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Phone No.</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Age</th>
+              <th>Date of Birth</th>
+              <th>Time Stamp</th>
+            </tr>
+            </thead>
+        </table>
+
+    </div>
+
+    <div id="Bus_Owners" class="tabcontent">
+        <script src="scripts/del_owners.js" type="module"></script>
+        <h3><div class="bus_owners">&darr;</div></h3>
+        
+        <div class="form">
+            Enter Bus Owner Id : <br><input type="text" id="user_id4">
+            <button id="removeData5" class="btn">Delete</button>
+        </div>
+        
+        
+        <table id='dataTb5' class="center">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
+              
+            </tr>
+            </thead>
+        </table>
+
+    </div>
+
+    <div id="Status" class="tabcontent">
+        <script src="scripts/status.js" type="module"></script>
+        <h3><div class="status">&darr;</div></h3>
+
+        <table id='dataTb4' class="center">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Record type</th>
+              <th>Record Id</th>
+              <th>Time Stamp</th>
+              <th>Status</th>
+              
+            </tr>
+            </thead>
+        </table>
+
+    </div>
+
+</body>
+</html>

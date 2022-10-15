@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approval Panel</title>
+
+    <!-- favicons -->
+    <link rel="shortcut icon" href="icon/trippad_logo.png" type="image/x-icon">
+    <link rel="icon" href="icon/trippad_logo.png" type="image/x-icon">
+</head>
+<style>
+    body{
+        margin: 0px;
+        padding: 0px;
+        font-family: 'Trebuchet MS';
+        background-color: rgb(48, 48, 48);
+    }
+    .back{
+        float: left;
+        padding-top: 10px;
+        padding-left: 10px;
+        height: 40px;
+        width: auto;
+    }
+    h2{
+        background-color: black;
+        color: whitesmoke;
+        margin-top: 0px;
+        text-align: center;
+        padding-top: 10px;
+        font-size: 30px;
+        height: 50px;
+    }
+    div.container{
+        
+        margin: auto;
+        width: 400px;
+        border: 2px solid rgb(252, 252, 252);
+        padding: 10px;
+        margin-top: 40px;
+        color: whitesmoke;
+        border-radius: 20px;
+    }
+    .container h3{
+        padding-left: 20px;
+    }
+    .container p{
+        padding-left: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+    }
+    div.container .btn{
+        text-align: center;
+    }
+    .btn button{
+        margin-top: 10px;
+        padding: 5px 18px;
+        color: whitesmoke;
+        background-color: black;
+        margin-left: 20px;
+        margin-right: 10px;
+        cursor: pointer;
+        border-radius: 20px;
+    }
+    footer {
+    position: fixed;
+    width: 100%;
+    bottom: 20px;
+    text-align: center;
+    color: #E8EDF2;
+  }
+
+
+</style>
+<script type="module">
+    
+    // Import The Functions
+    import {
+        initializeApp
+    } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js';
+    import {
+        getAnalytics
+    } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js';
+    import {
+        getDatabase,
+        ref,
+        set,
+        onValue
+   
+    } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js';
+
+
+    // Config Database Connection
+    const firebaseConfig = {
+    apiKey: "AIzaSyCvD33IM4CmwD33e0RwJoVAJt0JeSiBaEc",
+    authDomain: "busbookingapp-ecb53.firebaseapp.com",
+    databaseURL: "https://busbookingapp-ecb53-default-rtdb.firebaseio.com",
+    projectId: "busbookingapp-ecb53",
+    storageBucket: "busbookingapp-ecb53.appspot.com",
+    messagingSenderId: "559452439504",
+    appId: "1:559452439504:web:379828be835ad2d2a6afd5",
+    measurementId: "G-2RK15KDHP8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // catch buses id value
+    var queryString = null;
+    queryString = decodeURIComponent(window.location.search);
+    queryString = queryString.substring(4);
+    
+    
+
+    const starCountRef = ref(database, 'bus_owners/'+ queryString );
+    
+    onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+
+        approved.addEventListener('click', (e) => {
+            
+            if(queryString){
+                if(queryString == data.uid){
+                    
+                    // update/set all value
+                    const starCountRef = ref(database, 'bus_owners/' + queryString );
+                    onValue(starCountRef, (snapshot) => {
+                    const data = snapshot.val();
+                        set(ref(database, 'bus_owners/' + queryString), {
+                                        
+                            
+                            acc_status: "a",
+                            busesid: "",
+                            email: data.email,
+                            ownerid: data.ownerid,
+                            uid: data.uid,
+                            username: data.username
+                        });
+                            
+                    });
+                }
+                alert("\nApproved Successfully.");
+                queryString = null;
+                window.location.href = "view_records.html";
+            }
+            else{
+                alert("\nERROR : Not selected any Bus Id");
+            }
+        });
+
+        reject.addEventListener('click', (e) => {
+            if(queryString){
+                remove(ref(database, 'bus_owners/' + queryString));
+                alert("\nData Removed..!");
+                queryString = null;
+                window.location.href = "view_records.html";
+            }
+            else{
+                alert("Empty");
+            }
+        });
+    });
+
+</script>
+
+<body>
+    <a href="view_records.html"><img class="back" src="images/back.png" alt="backButton" width="50px" height="auto"></a>
+    <h2>Bus Owner Approval Panel</h2>
+    <div class="container">
+        <h3>Take Action</h3>
+        <p>Changes made to the database cannot be revoked.</p>
+        <ul>
+            <li>Press 'Approve Button' to approve the request.</li>
+            <li>Press 'Reject Button' to reject the request.</li>
+        </ul>
+    <div class="btn">
+        <button id="approved">Approve</button>
+        <button id="reject">Reject</button>
+    </div>
+    </div>
+    <footer>
+        &#169; 2022 Trippad
+    </footer>
+    
+</body>
+</html>

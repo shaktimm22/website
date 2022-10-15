@@ -1,0 +1,138 @@
+/* Delete Record Stylesheet */
+body{
+  font-family: 'Trebuchet MS';
+    margin: 0px;
+    padding: 0px;
+}
+.back{
+  float: left;
+  padding-top: 30px;
+  padding-left: 10px;
+  height: 40px;
+  width: auto;
+}
+h2{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.header{
+  margin-top: 0px;
+  padding: 20px;
+  padding-left: 50px;
+  font-size: 50px;
+  color: whitesmoke;
+  background-color: #000;
+}
+
+/* Style the tab */
+.tab {
+  margin-top: 0px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 7px 25px;
+  transition: 0.3s;
+  font-size: 17px;
+  font-family: 'trebuchet MS';
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: rgb(168, 165, 165);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: rgb(0, 0, 0);
+  color: whitesmoke ;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+div.tabcontent div.buses{
+  margin-left: 27px;
+  font-size: 30px;
+  
+}
+div.tabcontent div.users{
+  margin-left: 120px;
+  font-size: 30px;
+  
+}
+div.tabcontent div.status{
+  margin-left: 350px;
+  font-size: 30px;
+}
+div.tabcontent div.bus_owners{
+  margin-left: 230px;
+  font-size: 30px;
+  
+}
+/*Add Table Style */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+th, td {
+  padding: 6px 16px;
+  font-size: 14px;
+}
+th {
+  background: #212121;
+  color: #fff;
+  text-align: left;
+}
+tr:first-child th:first-child {
+  border-top-left-radius: 6px;
+}
+tr:first-child th:last-child {
+  border-top-right-radius: 6px;
+}
+td {
+  border-right: 1px solid #c6c9cc;
+  border-bottom: 1px solid #c6c9cc;
+}
+td:first-child {
+  border-left: 1px solid #c6c9cc;
+}
+tr:nth-child(even) td {
+  background: #eaeaed;
+}
+tr:last-child td:first-child {
+  border-bottom-left-radius: 6px;
+}
+tr:last-child td:last-child {
+  border-bottom-right-radius: 6px;
+}
+.form input{
+  width: 300px;
+  
+}
+.form{
+  padding-left: 18px;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+.form .btn{
+  color: whitesmoke;
+  background-color: #000;
+  padding: 2px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+}
