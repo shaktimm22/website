@@ -39,11 +39,11 @@
    onValue(starCountRef, (snapshot) => {
    const data = snapshot.val();
 
-   document.getElementById('id_proof').innerHTML = "<a href=data.id_proof>View</a>";
-   document.getElementById('pan_card').innerHTML = data.pan_card;
-   document.getElementById('gstin_cert').innerHTML = data.gstin_cert;
-   document.getElementById('partnership').innerHTML = data.partnership_deed;
-   document.getElementById('cancelled_cheque').innerHTML = data.cancelled_cheque;
-   document.getElementById('pvt_lit_doc').innerHTML = data.pvt_ltd_doc;
+   document.getElementById('id_proof').innerHTML = "<a href="+data.id_proof+">View</a>";
+   document.getElementById('pan_card').innerHTML = "<a href="+data.pan_card+">View</a>";
+   document.getElementById('gstin_cert').innerHTML = "<a href="+data.gstin_cert+">View</a>";
+   document.getElementById('partnership').innerHTML = "<a href="+data.partnership_deed+">View</a>";
+   document.getElementById('cancelled_cheque').innerHTML = "<a href="+data.cancelled_cheque+">View</a>";
+   document.getElementById('pvt_lit_doc').innerHTML = "<a href="+data.pvt_ltd_doc+">View</a>";
 });
        
