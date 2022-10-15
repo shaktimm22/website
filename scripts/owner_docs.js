@@ -39,7 +39,7 @@
    onValue(starCountRef, (snapshot) => {
    const data = snapshot.val();
 
-   document.getElementById('id_proof').innerHTML = data.id_proof;
+   document.getElementById('id_proof').innerHTML = "<a href=data.id_proof>View</a>";
    document.getElementById('pan_card').innerHTML = data.pan_card;
    document.getElementById('gstin_cert').innerHTML = data.gstin_cert;
    document.getElementById('partnership').innerHTML = data.partnership_deed;
